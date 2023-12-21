@@ -71,7 +71,12 @@ Fixed (int FRAC_BITS=16)  if (FRAC_BITS>0 && FRAC_BITS<(int.sizeof*8)) {
     }
 
     T 
-    opBinary (string op : "*") (T b) {
+    opBinary (string op : "*") (T b) if (FRAC_BITS%2 == 0) {
+        return T ((a/HALF_FRAC_UNIT) * (b.a/HALF_FRAC_UNIT));
+    }
+
+    T 
+    opBinary (string op : "*") (T b) if (FRAC_BITS%2 == 1) {
         import std.conv;
 
         long c = (cast(long)a) * (cast(long)b.a) / FRAC_UNIT;
