@@ -1,6 +1,7 @@
 module fixed;
 
-
+// 1.0 = INT.FRAC = 16-bit . 16-bit
+//
 // Example:
 //   auto fixed_one  = Fixed(1,0);
 //   auto fixed_zero = Fixed(0,0);
