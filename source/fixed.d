@@ -2,12 +2,12 @@ module fixed;
 
 
 struct 
-Fixed (byte FRACBITS=16) {
+Fixed (int FRAC_BITS=16)  if (FRAC_BITS>0 && FRAC_BITS<(int.sizeof*8)) {
     int a;
 
-    enum FRAC_UNIT       = ( 1 <<  FRACBITS );     // 0b1_0000_0000_0000_0000 = 0x10000 = 65536
-    enum HALF_FRAC_UNIT  = ( 1 << (FRACBITS/2) );  // 0b__0000_0001_0000_0000 = 0x__100 = 256
-    enum ROUND_MASK      = ( 1 << (FRACBITS-1) );  // 0b__1000_0000_0000_0000 = 0x_8000 = 32768
+    enum FRAC_UNIT       = ( 1 <<  FRAC_BITS );     // 0b1_0000_0000_0000_0000 = 0x10000 = 65536
+    enum HALF_FRAC_UNIT  = ( 1 << (FRAC_BITS/2) );  // 0b__0000_0001_0000_0000 = 0x__100 = 256
+    enum ROUND_MASK      = ( 1 << (FRAC_BITS-1) );  // 0b__1000_0000_0000_0000 = 0x_8000 = 32768
     alias T = typeof(this);
 
 
@@ -51,12 +51,12 @@ Fixed (byte FRACBITS=16) {
     }
 
     T 
-    opBinary (string op : "/") (T b) if (FRACBITS%2 == 0) {
+    opBinary (string op : "/") (T b) if (FRAC_BITS%2 == 0) {
         return T ((a/HALF_FRAC_UNIT) / (b.a/HALF_FRAC_UNIT));
     }
 
     T 
-    opBinary (string op : "/") (T b) if (FRACBITS%2 == 1) {
+    opBinary (string op : "/") (T b) if (FRAC_BITS%2 == 1) {
         import std.conv;
 
         double c = (cast(double)a) / (cast(double)b.a) * FRAC_UNIT;
@@ -96,7 +96,7 @@ Fixed (byte FRACBITS=16) {
     string 
     toString () {
         import std.format : format;
-        return format!"%s(%d)"( typeof(this).stringof, a / 2^^16 );
+        return format!"%s(%d)"( T.stringof, to_int );
     }
 }
 
