@@ -6,8 +6,8 @@ module fixed;
 // Example:
 //   auto fixed_one  = Fixed(1,0);
 //   auto fixed_zero = Fixed(0,0);
-//   writeln (fixed_one);          // Fixed!16(0)
-//   writeln (fixed_zero);         // Fixed!16(1)
+//   writeln (fixed_one);          // Fixed!16(1)
+//   writeln (fixed_zero);         // Fixed!16(0)
 //   writeln (fixed_zero.to_int);  // 1
 struct 
 Fixed (int FRAC_BITS=16)  if (FRAC_BITS>0 && FRAC_BITS<(int.sizeof*8)) {
