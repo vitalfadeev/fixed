@@ -1,4 +1,5 @@
 module fixed;
+// Fixed-point type
 
 // 1.0 = INT.FRAC = 16-bit . 16-bit
 //
