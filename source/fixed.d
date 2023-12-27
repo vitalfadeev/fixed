@@ -145,7 +145,7 @@ Fixed (int FRAC_BITS=16)  if (FRAC_BITS>0 && FRAC_BITS<(int.sizeof*8)) {
     }
 
 
-    enum PI = FRAC_UNIT/2;
+    enum PI = T (3.1415926);
     // angle     circle
     //   0     = top
     //   1     = 1/49152
